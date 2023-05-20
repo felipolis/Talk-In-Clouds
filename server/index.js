@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import "dotenv/config";
 import colors from 'colors';
 
-// -------- CONFIGURAÇÕES --------
+// -------- CONFIGURAÇÕES DO SERVIDOR --------
 const app = express();
 
 app.use(cors());
@@ -18,7 +18,7 @@ const port = process.env.PORT || 5000;
 const server = http.createServer(app);
 
 
-// -------- INICIALIZAÇÃO DO SERVIDOR HTTP E BANCO DE DADOS --------
+// -------- INICIALIZAÇÃO DO SERVIDOR HTTP E CONEXÃO AO BANCO DE DADOS --------
 
 const startServer = async () => {
     try {
