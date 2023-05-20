@@ -14,9 +14,25 @@ Para manter a consistência dos dados, utilizamos o LocalStorage, que é uma for
 
 No geral, essa aplicação de sistema distribuído foi projetada para fornecer uma plataforma de chat em tempo real, com recursos de cadastro, autenticação, grupos de conversa e armazenamento seguro de dados. Essa combinação de tecnologias e abordagens permite uma comunicação eficiente e confiável entre os usuários, independentemente de sua localização geográfica.
 
+## Sistema Distribuido
+A aplicação se encaixa na definição de sistemas distribuídos de várias maneiras. Um sistema distribuído é composto por um conjunto de componentes interconectados que trabalham juntos para realizar uma função específica. Nesse caso, a aplicação web de chat em tempo real utiliza diferentes tecnologias e serviços distribuídos para criar uma experiência colaborativa entre os usuários. Abaixo, detalharei como a aplicação se encaixa nessa definição:
+
+1. Comunicação entre componentes distribuídos: A aplicação permite a comunicação entre diferentes componentes distribuídos, como o cliente (navegador web) e o servidor. O cliente se conecta ao servidor para enviar e receber mensagens em tempo real. Essa comunicação é estabelecida por meio do protocolo de comunicação do socket.io, que facilita a troca de eventos em tempo real. Dessa forma, a aplicação permite que usuários em diferentes dispositivos e locais se comuniquem entre si.
+
+2. Escalabilidade e disponibilidade: A aplicação utiliza o MongoDB hospedado no Atlas como banco de dados. Essa escolha permite que os dados sejam armazenados de forma distribuída em vários servidores, garantindo a escalabilidade e a disponibilidade do sistema. O MongoDB é projetado para funcionar em ambientes distribuídos, permitindo que os dados sejam replicados e distribuídos em várias máquinas para lidar com um grande número de usuários e garantir a disponibilidade contínua do serviço.
+
+3. Gerenciamento de autenticação e autorização: A aplicação possui recursos de cadastro e login, o que requer um gerenciamento adequado de autenticação e autorização. Quando um usuário se cadastra ou faz login, as informações de autenticação são verificadas no servidor para garantir que apenas usuários autorizados tenham acesso aos recursos da aplicação. Esse processo envolve a troca de informações entre o cliente e o servidor distribuído, onde os dados de autenticação e autorização são validados e mantidos de forma consistente.
+
+4. Armazenamento de arquivos na nuvem: A aplicação utiliza o serviço de hospedagem de imagens do Cloudinary para armazenar as fotos de perfil dos usuários. O Cloudinary é uma solução distribuída de armazenamento em nuvem, que permite que as imagens sejam carregadas, armazenadas e acessadas de forma eficiente e confiável. Ao utilizar esse serviço distribuído, a aplicação garante a escalabilidade e a disponibilidade do armazenamento de arquivos, além de fornecer recursos avançados de processamento de imagens.
+
+5. Consistência dos dados: Para garantir a consistência dos dados, a aplicação utiliza o LocalStorage no navegador. O LocalStorage é uma forma de armazenamento de dados local no cliente, o que significa que as informações do usuário são armazenadas no próprio dispositivo. Essa abordagem distribuída permite que os dados sejam acessíveis mesmo quando houver uma desconexão temporária ou perda de conexão com a internet. Assim, os usuários podem continuar a usar a aplicação e visualizar suas informações mesmo em situações de conectividade instável.
+
+Em resumo, a aplicação de chat em tempo real se encaixa na definição de sistemas distribuídos por meio da comunicação entre componentes distribuídos, escalabilidade
+
 ## Arquitetura do sistema
 
 ![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/arquitetura.png?raw=true)
+
 
 
 ## Funcionalidades
