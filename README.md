@@ -16,4 +16,6 @@ No geral, essa aplicação de sistema distribuído foi projetada para fornecer u
 
 ## Arquitetura do sistema
 
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/arquitetura.png?raw=true)
+
 ## Rodando o projeto
