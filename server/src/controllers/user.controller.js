@@ -47,3 +47,9 @@ const signup = async (req, res) => {
         responseHandler.error(res);
     }
 };
+
+
+
+export default {
+    signup
+}
