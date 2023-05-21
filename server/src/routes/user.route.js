@@ -43,6 +43,20 @@ router.post(
     userController.signup
 );
 
+router.post(
+    '/signin',
+    body('email')
+        .isEmail().withMessage('Email inválido')
+        .exists().withMessage('Email é obrigatório'),
+
+    body('password')
+        .exists().withMessage('Senha é obrigatória')
+        .isLength({ min: 8 }).withMessage('Senha deve ter no mínimo 8 caracteres'),
+
+    requestHandler.validate,
+    userController.signin
+)
+
 
 
 

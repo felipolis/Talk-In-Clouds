@@ -35,11 +35,16 @@ const signup = async (req, res) => {
             { expiresIn: "24h" }
         );
 
+        // Busca o usuario no banco de dados
+        const userNew = await userModel.findOne({ email }).select("pic");
+
         // Retorna o usuário e o token
         return responseHandler.created(res, {
-            token,
-            ...user._doc,
-            id: user._id
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            pic: userNew.pic,
+            token
         });
 
     } catch (error) {
@@ -48,8 +53,50 @@ const signup = async (req, res) => {
     }
 };
 
+const signin = async (req, res) => {
+    try {
+        // Recebe os dados do body
+        const {
+            email,
+            password
+        } = req.body;
 
+        // Verifica se o usuário existe
+        const user = await userModel.findOne({ email }).select("password id salt name email pic");
+
+        if (!user) {
+            return responseHandler.badrequest(res, 'Usuário não encontrado');
+        }
+
+        // Verifica se a senha está correta
+        if (!user.validPassword(password)) {
+            return responseHandler.badrequest(res, 'Senha incorreta');
+        }
+
+        // Gera o token
+        const token = jsonwebtoken.sign(
+            { data: user._id },
+            process.env.TOKEN_SECRET_KEY,
+            { expiresIn: "24h" }
+        )
+
+        // Retorna o usuário e o token
+        return responseHandler.ok(res, {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            pic: user.pic,
+            token
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        responseHandler.error(res);
+    }
+};
 
 export default {
-    signup
+    signup,
+    signin
 }
