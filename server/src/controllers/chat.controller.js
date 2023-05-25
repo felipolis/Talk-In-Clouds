@@ -68,8 +68,6 @@ const fetchChats = async (req, res) => {
                     select: "name, pic, email"
                 });
 
-                console.log(results.latestMessage)
-
                 // Retorna os chats
                 return responseHandler.ok(res, results);
             });
