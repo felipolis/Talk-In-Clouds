@@ -55,6 +55,14 @@ router.post(
 
     requestHandler.validate,
     userController.signin
+    )
+    
+    
+router.get(
+    '/',
+    tokenMiddleware.auth,
+    requestHandler.validate,
+    userController.allUsers
 )
 
 

@@ -96,7 +96,28 @@ const signin = async (req, res) => {
     }
 };
 
+const allUsers = async (req, res) => {
+    try {
+        const keyword = req.query.search ? {
+            $or: [
+                { name: { $regex: req.query.search, $options: 'i' } },
+                { email: { $regex: req.query.search, $options: 'i' } }
+            ]
+        } : {}
+    
+        const users = await userModel
+            .find(keyword)
+            .find({ _id: { $ne: req.user._id } })
+    
+        return responseHandler.ok(res, users);
+    } catch (error) {
+        console.log(error);
+        responseHandler.error(res);
+    }
+};
+
 export default {
     signup,
-    signin
+    signin,
+    allUsers
 }
