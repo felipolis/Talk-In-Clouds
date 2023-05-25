@@ -132,7 +132,35 @@ const renameGroup = async (req, res) => {
 }
 
 
-const removeFromGroup = async (req, res) => {}
+const removeFromGroup = async (req, res) => {
+    try {
+        const { chatId, userId } = req.body;
+
+        // Verifica se o usuario que está removendo é o admin do grupo
+        const isGroupAdmin = await chatModel.find({
+            _id: chatId,
+            groupAdmin: req.user._id
+        });
+
+        if (isGroupAdmin.length == 0) {
+            return responseHandler.unauthorize(res);
+        }
+
+        // Busca o grupo e remove o usuário
+        const removed = await chatModel.findByIdAndUpdate(
+            chatId,
+            { $pull: { users: userId } },
+            { new: true }
+        )
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password");
+
+        return responseHandler.ok(res, removed);
+    } catch (error) {
+        console.log(error);
+        responseHandler.error(res);
+    }
+}
 
 const addToGroup = async (req, res) => {
     try {

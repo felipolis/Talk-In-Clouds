@@ -58,7 +58,18 @@ router.put(
     chatController.renameGroup
 )
 
+router.put(
+    '/groupremove',
+    tokenMiddleware.auth,
+    body('chatId')
+        .exists().withMessage('chatId é obrigatório'),
 
+    body('userId')
+        .exists().withMessage('userId é obrigatório'),
+
+    requestHandler.validate,
+    chatController.removeFromGroup
+)
 
 
 
