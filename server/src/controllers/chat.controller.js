@@ -68,6 +68,8 @@ const fetchChats = async (req, res) => {
                     select: "name, pic, email"
                 });
 
+                console.log(results.latestMessage)
+
                 // Retorna os chats
                 return responseHandler.ok(res, results);
             });
@@ -93,7 +95,7 @@ const createGroupChat = async (req, res) => {
         });
 
         // Busca o grupo criado
-        const fullGroupChat = await chatModel.findOnde({ _id: groupChat._id })
+        const fullGroupChat = await chatModel.findOne({ _id: groupChat._id })
             .populate("users", "-password")
             .populate("groupAdmin", "-password");
 
