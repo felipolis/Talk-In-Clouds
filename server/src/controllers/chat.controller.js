@@ -79,8 +79,37 @@ const fetchChats = async (req, res) => {
 };
 
 
+const createGroupChat = async (req, res) => {
+    try {
+        const users = JSON.parse(req.body.users);
+        users.push(req.user._id);
+
+        // Crar o grupo
+        const groupChat = await chatModel.create({
+            chatName: req.body.name,
+            users: users,
+            isGroupChat: true,
+            groupAdmin: req.user
+        });
+
+        // Busca o grupo criado
+        const fullGroupChat = await chatModel.findById(groupChat._id)
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password");
+
+        // Retorna o grupo criado
+        return responseHandler.created(res, fullGroupChat);
+        
+    } catch (error) {
+        console.log(error);
+        responseHandler.error(res);
+    }
+}
+
+
 
 export default {
     accessChat,
-    fetchChats
+    fetchChats,
+    createGroupChat
 }

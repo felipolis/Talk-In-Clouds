@@ -27,6 +27,26 @@ router.get(
 )
 
 
+router.post(
+    '/group',
+    tokenMiddleware.auth,
+    body('users')
+        .exists().withMessage('users é obrigatório')
+        .custom((value, { req }) => {
+            // verifica se o array tem mais de 2 elementos
+            if (value.length < 2) {
+                throw new Error('users deve ter pelo menos 2 elementos');
+            }
+            return true;
+        }),
+        
+    body('name')
+        .exists().withMessage('name é obrigatório'),
+    requestHandler.validate,
+    chatController.createGroupChat
+)
+
+
 
 
 
