@@ -62,6 +62,18 @@ router.put(
 
 
 
+router.put(
+    '/groupadd',
+    tokenMiddleware.auth,
+    body('chatId')
+        .exists().withMessage('chatId é obrigatório'),
+
+    body('userId')
+        .exists().withMessage('userId é obrigatório'),
+
+    requestHandler.validate,
+    chatController.addToGroup
+)
 
 
 
