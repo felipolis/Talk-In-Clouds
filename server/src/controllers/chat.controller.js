@@ -107,9 +107,44 @@ const createGroupChat = async (req, res) => {
 }
 
 
+const renameGroup = async (req, res) => {
+    try {
+        const { chatId, chatName } = req.body;
+
+        // Busca o grupo e atualiza o nome
+        const updateChat = await chatModel.findByIdAndUpdate(
+            chatId,
+            { chatName: chatName },
+            { new: true }
+        )
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password");
+
+        if (!updateChat) {
+            return responseHandler.notfound(res);
+        } else {
+            return responseHandler.ok(res, updateChat);
+        }
+    } catch (error) {
+        console.log(error);
+        responseHandler.error(res);
+    }
+}
+
+
+const removeFromGroup = async (req, res) => {}
+
+const addToGroup = async (req, res) => {}
+
+
+
+
 
 export default {
     accessChat,
     fetchChats,
-    createGroupChat
+    createGroupChat,
+    renameGroup,
+    removeFromGroup,
+    addToGroup
 }

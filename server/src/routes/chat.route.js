@@ -46,6 +46,17 @@ router.post(
     chatController.createGroupChat
 )
 
+router.put(
+    '/rename',
+    tokenMiddleware.auth,
+    body('chatId')
+        .exists().withMessage('chatId é obrigatório'),
+
+    body('chatName')
+        .exists().withMessage('chatName é obrigatório'),
+    requestHandler.validate,
+    chatController.renameGroup
+)
 
 
 
