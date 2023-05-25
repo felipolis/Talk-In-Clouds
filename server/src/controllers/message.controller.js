@@ -43,7 +43,7 @@ const sendMessage = async (req, res) => {
         })
 
         // atualiza a ultima mensagem do chat
-        await chatModel.findByIdAndUpdate(chatId, { lastMessage: message });
+        await chatModel.findByIdAndUpdate(req.body.chatId, { lastMessage: message._id });
 
         // Retorna a mensagem
         return responseHandler.ok(res, message);

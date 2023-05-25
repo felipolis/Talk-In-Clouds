@@ -37,7 +37,7 @@ const accessChat = async (req, res) => {
 
             try {
                 const createdChat = await chatModel.create(chatData);
-                const fullChat = await chatModel.findById(createdChat._id)
+                const fullChat = await chatModel.findOne({ _id: createdChat._id })
                     .populate("users", "-password")
 
                 return responseHandler.created(res, fullChat);
@@ -93,7 +93,7 @@ const createGroupChat = async (req, res) => {
         });
 
         // Busca o grupo criado
-        const fullGroupChat = await chatModel.findById(groupChat._id)
+        const fullGroupChat = await chatModel.findOnde({ _id: groupChat._id })
             .populate("users", "-password")
             .populate("groupAdmin", "-password");
 
