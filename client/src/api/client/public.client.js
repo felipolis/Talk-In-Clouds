@@ -1,7 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
-const baseURL = process.env.BASE_BASER_URL || 'http://127.0.0.1:3000/api/v1';
+const baseURL = process.env.BASE_URL || 'http://127.0.0.1:3000/api/v1';
 
 const publicClient = axios.create({
     baseURL,
