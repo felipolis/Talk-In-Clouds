@@ -8,7 +8,7 @@ export const themeModes = {
 
 const themeConfigs = {
     custom: ({ mode }) => {
-        const customPalette = mode === themeModes.dark ? {
+        const customPalette = mode === themeModes.light ? {
             background: {
                 primary: '#ffffff',
                 secondary: '#EBF4FB',
