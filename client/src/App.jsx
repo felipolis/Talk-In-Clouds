@@ -1,5 +1,3 @@
-import './App.css';
-
 import { ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import themeConfigs from "./configs/theme.configs";
