@@ -32,3 +32,12 @@ export const userSlice = createSlice({
         }
     },
 });
+
+export const {
+    setUser,
+    setSelectedChat,
+    setNotifications,
+    setChats
+} = userSlice.actions;
+
+export default userSlice.reducer;
