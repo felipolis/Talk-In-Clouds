@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import './App.css';
 import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
 
@@ -10,6 +9,7 @@ function App() {
 
 
   return (
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />}/>
@@ -20,6 +20,7 @@ function App() {
           }/>
         </Routes>
       </BrowserRouter>
+    </div>
   );
 }
 
