@@ -33,6 +33,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
+  const [isOnline, setIsOnline] = useState(false);
   const toast = useToast();
 
   const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
@@ -181,7 +182,46 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     />
                     {messages && (!selectedChat.isGroupChat ? (
                         <>
-                            {getSender(user, selectedChat.users)}
+                            <Box>
+                                <Text>
+                                  {getSender(user, selectedChat.users)}
+                                </Text>
+                                  {isOnline ? (
+                                    <Box
+                                      display="flex"
+                                      alignItems="center"
+                                      justifyContent="flex-start"
+                                      gap={1}
+                                    >
+                                      <i 
+                                        className="fas fa-circle" 
+                                        style={{ 
+                                          color: "green", 
+                                          width: "10px" 
+                                        }}></i>
+                                      <Text fontSize="sm" color="gray.500">
+                                        Online
+                                      </Text>
+                                    </Box>
+                                  ) : (
+                                    <Box
+                                      display="flex"
+                                      alignItems="center"
+                                      justifyContent="flex-start"
+                                      gap={1}
+                                    >
+                                      <i 
+                                        className="fas fa-circle" 
+                                        style={{ 
+                                          color: "grey", 
+                                          fontSize: "10px",
+                                        }}></i>
+                                      <Text fontSize="sm" color="gray.500">
+                                        Offline
+                                      </Text>
+                                    </Box>
+                                  )}
+                            </Box>
                             <ProfileModal
                                 user={getSenderFull(user, selectedChat.users)}
                             />
