@@ -16,13 +16,6 @@ import {
 const HomePage = () => {
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("actkn"));
-    if (user) {
-      navigate('/chats')
-    }
-  }, [navigate])
-
   return (
     <Container maxW='xl' centerContent>
       <Box

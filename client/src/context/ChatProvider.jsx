@@ -18,6 +18,8 @@ const ChatProvider = ({ children }) => {
 
     if (!userInfo) {
       navigate("/");
+    } else {
+      navigate("/chats");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
