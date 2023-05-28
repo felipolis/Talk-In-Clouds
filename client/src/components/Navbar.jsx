@@ -102,7 +102,7 @@ const Navbar = () => {
     console.log(response, error);
 
 		if (response) {
-			if (!chats.find((c) => c.id === response.id)) setChats([response, ...chats]);
+			if (!chats.find((c) => c._id === response._id)) setChats([response, ...chats]);
       setSelectedChat(response);
       setLoadingChat(false);
       onClose();
@@ -159,7 +159,7 @@ const Navbar = () => {
               {!notification.length && "No New Messages"}
               {notification.map((notif) => (
                 <MenuItem
-                  key={notif.id}
+                  key={notif._id}
                   onClick={() => {
                     setSelectedChat(notif.chat);
                     setNotification(notification.filter((n) => n !== notif));
@@ -213,9 +213,9 @@ const Navbar = () => {
             ) : (
               searchResult?.map((user) => (
                 <UserListItem
-                  key={user.id}
+                  key={user._id}
                   user={user}
-                  handleFunction={() => accessChat(user.id)}
+                  handleFunction={() => accessChat(user._id)}
                 />
               ))
             )}
