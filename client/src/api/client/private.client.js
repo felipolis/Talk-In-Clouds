@@ -15,7 +15,7 @@ const privateClient = axios.create({
       ...config,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("actkn")}`
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("userInfo").token)}`
       }
     };
   });

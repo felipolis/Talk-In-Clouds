@@ -33,8 +33,6 @@ const Login = () => {
         return;
       }
   
-      // console.log(email, password);
-
       const { response, err } = await userApi.signin({ email, password });
 
       if (response) {
