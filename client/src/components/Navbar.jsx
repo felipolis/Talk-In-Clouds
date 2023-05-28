@@ -73,13 +73,10 @@ const Navbar = () => {
     }
 
 		setLoading(true);
-		console.log(search);
 		const { response, error } = await userApi.getUsers({ search });
-		console.log(response, error);
 
 		if (response) {
 			setLoading(false);
-			console.log(response);
       setSearchResult(response);
 		}
 
@@ -99,7 +96,6 @@ const Navbar = () => {
 	const accessChat = async (userId) => {
 		setLoadingChat(true);
 		const { response, error } = await chatApi.accessChat({userId});
-    console.log(response, error);
 
 		if (response) {
 			if (!chats.find((c) => c._id === response._id)) setChats([response, ...chats]);
