@@ -21,7 +21,7 @@ import userApi from "../api/modules/user.api";
 import chatApi from "../api/modules/chat.api";
 import messageApi from "../api/modules/message.api";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = `${process.env.REACT_APP_SOCKET_URL}` || "http://127.0.0.1:5000";
 
 var socket, selectedChatCompare;
 
