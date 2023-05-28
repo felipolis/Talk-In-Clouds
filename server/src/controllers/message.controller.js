@@ -7,7 +7,7 @@ const allMessages = async (req, res) => {
     try {
         // Encontra as mensagens do chat
         const messages = await messageModel.find({ chat: req.params.chatId })
-            .populate("sender", "name, pic, email")
+            .populate("sender", "name pic email")
             .populate("chat")
 
         // Retorna as mensagens

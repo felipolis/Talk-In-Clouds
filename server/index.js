@@ -39,3 +39,55 @@ const startServer = async () => {
 startServer();
 
 // -------- SOCKETS --------
+// cria o server socket
+import { Server } from 'socket.io';
+
+const io = new Server(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: 'http://localhost:3000',
+    }
+});
+
+// Eventos de conexão e desconexão
+io.on('connection', (socket) => {
+    console.log('a user connected');
+
+    socket.on('setup', (userData) => {
+        socket.join(userData._id);
+        socket.emit('connected');
+        console.log(`User ${userData._id} connected`);
+    });
+
+    socket.on("join chat", (room) => {
+        socket.join(room);
+        console.log(`User joined room ${room}`);
+    });
+
+    socket.on("new message", (newMessageRecieved) => {
+        console.log(newMessageRecieved);
+
+        var chat = newMessageRecieved.chat;
+
+        if (!chat.users) return console.log("Chat.users not defined");
+
+        chat.users.forEach((user) => {
+            if (user._id == newMessageRecieved.sender._id) return;
+
+            socket.in(user._id).emit("message received", newMessageRecieved);
+        });
+    });
+
+    socket.on("typing", (room) => {
+        socket.in(room).emit("typing");
+    });
+
+    socket.on("stop typing", (room) => {
+        socket.in(room).emit("stop typing");
+    });
+
+    socket.off("disconnect", () => {
+        console.log("user disconnected");
+        socket.leave(userData._id);
+    });
+});
