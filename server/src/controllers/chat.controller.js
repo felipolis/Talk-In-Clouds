@@ -81,7 +81,7 @@ const fetchChats = async (req, res) => {
 
 const createGroupChat = async (req, res) => {
     try {
-        const users = JSON.parse(req.body.users);
+        const users = req.body.users;
         users.push(req.user._id);
 
         // Crar o grupo

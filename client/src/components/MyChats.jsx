@@ -61,6 +61,7 @@ const MyChats = ({ fetchAgain }) => {
         w="100%"
         justifyContent="space-between"
         alignItems="center"
+        pt={3}
 				bg="#E2EEF7"
       >
         My Chats
@@ -69,6 +70,7 @@ const MyChats = ({ fetchAgain }) => {
             display="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
+            colorScheme="red"
           >
             New Group Chat
           </Button>
