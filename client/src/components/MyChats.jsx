@@ -91,14 +91,18 @@ const MyChats = ({ fetchAgain }) => {
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bg={selectedChat === chat ? "#38B2AC" : "#EBF4FB"}
-                color={selectedChat === chat ? "white" : "black"}
+                bg={selectedChat === chat 
+                  ? "linear-gradient(90deg, rgba(255,255,255,1) 5%, rgba(255,255,255,0.5) 10%, rgba(255,255,255,0) 100%)" 
+                  : "EBF4FB"}
+                color={selectedChat === chat ? "black" : "black"}
                 px={3}
                 py={6}
-                borderRadius="lg"
                 key={chat._id}
 								display="flex"
 								alignItems="center"
+                style={{
+                  borderLeft: selectedChat === chat ? "4px solid #FD4F4F" : "none",
+                }}
               >
 								<Avatar
                   size="lg"
@@ -131,6 +135,7 @@ const MyChats = ({ fetchAgain }) => {
 										</Text>
 									)}
 								</Box>
+
               </Box>
             ))}
           </Stack>
