@@ -3,7 +3,7 @@ import { Box, Stack, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getSender } from "../config/ChatLogics";
+import { getSender, getSenderPic } from "../config/ChatLogics";
 import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./GroupChatModal";
 import { Button } from "@chakra-ui/react";
@@ -99,10 +99,10 @@ const MyChats = ({ fetchAgain }) => {
 								alignItems="center"
               >
 								<Avatar
-                  size="sm"
+                  size="lg"
                   cursor="pointer"
                   name={!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
-									src={!chat.isGroupChat ? getSender(loggedUser, chat.users).pic : chat.chatName}
+									src={`${!chat.isGroupChat ? getSenderPic(loggedUser, chat.users) : chat.chatName}`}
                 />
 								<Box
 									ml={3}
