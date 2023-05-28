@@ -95,26 +95,41 @@ const MyChats = ({ fetchAgain }) => {
                 py={6}
                 borderRadius="lg"
                 key={chat._id}
+								display="flex"
+								alignItems="center"
               >
 								<Avatar
                   size="sm"
                   cursor="pointer"
-                  name={user.name}
-                  src={user.pic}
+                  name={!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
+									src={!chat.isGroupChat ? getSender(loggedUser, chat.users).pic : chat.chatName}
                 />
-                <Text>
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
-                </Text>
-                {chat.latestMessage && (
-                  <Text fontSize="xs">
-                    <b>{chat.latestMessage.sender.name} : </b>
-                    {chat.latestMessage.content.length > 50
-                      ? chat.latestMessage.content.substring(0, 51) + "..."
-                      : chat.latestMessage.content}
-                  </Text>
-                )}
+								<Box
+									ml={3}
+									display="flex"
+									flexDir="column"
+									justifyContent="center"
+									alignItems="flex-start"
+								>
+									<Text
+										overflow="hidden"
+										textOverflow="ellipsis"
+										whiteSpace="nowrap"
+										maxW={{ base: "100px", md: "150px", lg: "200px", xl: "250px" }}
+									>
+										{!chat.isGroupChat
+											? getSender(loggedUser, chat.users)
+											: chat.chatName}
+									</Text>
+									{chat.latestMessage && (
+										<Text fontSize="xs">
+											<b>{chat.latestMessage.sender.name} : </b>
+											{chat.latestMessage.content.length > 50
+												? chat.latestMessage.content.substring(0, 51) + "..."
+												: chat.latestMessage.content}
+										</Text>
+									)}
+								</Box>
               </Box>
             ))}
           </Stack>
