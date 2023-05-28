@@ -95,7 +95,7 @@ const Register = () => {
     console.log(name, email, password, pic);
 
     // Requisição
-    const { response, err } = await userApi.signup({name, email, password, confirmPassword: confirmpassword, pic})
+    const { response, error } = await userApi.signup({name, email, password, confirmPassword: confirmpassword, pic})
 
     if (response) {
       console.log(response);
@@ -111,10 +111,10 @@ const Register = () => {
       navigate("/chats");
     }
 
-    if (err) {
+    if (error) {
       toast({
         title: "Error Occured!",
-        description: err,
+        description: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,

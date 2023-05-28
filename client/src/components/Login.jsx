@@ -33,7 +33,7 @@ const Login = () => {
         return;
       }
   
-      const { response, err } = await userApi.signin({ email, password });
+      const { response, error } = await userApi.signin({ email, password });
 
       if (response) {
         toast({
@@ -48,10 +48,10 @@ const Login = () => {
         navigate("/chats");
       }
 
-      if (err) {
+      if (error) {
         toast({
           title: "Error Occured!",
-          description: err,
+          description: error.message,
           status: "error",
           duration: 5000,
           isClosable: true,
