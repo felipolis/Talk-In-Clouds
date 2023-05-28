@@ -82,7 +82,6 @@ const MyChats = ({ fetchAgain }) => {
         bg="#EBF4FB"
         w="100%"
         h="100%"
-        borderRadius="lg"
         overflowY="hidden"
       >
         {chats ? (
@@ -95,46 +94,72 @@ const MyChats = ({ fetchAgain }) => {
                   ? "linear-gradient(90deg, rgba(255,255,255,1) 5%, rgba(255,255,255,0.5) 10%, rgba(255,255,255,0) 100%)" 
                   : "EBF4FB"}
                 color={selectedChat === chat ? "black" : "black"}
-                px={3}
-                py={6}
+                px={5}
+                pt={6}
                 key={chat._id}
 								display="flex"
-								alignItems="center"
+                flexDir="column"
+                justifyContent="space-between"
+                border="none"
+                gap={5}
+                
+
                 style={{
                   borderLeft: selectedChat === chat ? "4px solid #FD4F4F" : "none",
+                  margin: 0,
                 }}
               >
-								<Avatar
-                  size="lg"
-                  cursor="pointer"
-                  name={!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
-									src={`${!chat.isGroupChat ? getSenderPic(loggedUser, chat.users) : chat.chatName}`}
+                <Box
+                  display="flex"
+                  flexDir="row"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  w="100%"
+                >
+                  <Avatar
+                    size="lg"
+                    cursor="pointer"
+                    name={!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
+                    src={`${!chat.isGroupChat ? getSenderPic(loggedUser, chat.users) : chat.chatName}`}
+                  />
+                  <Box
+                    ml={3}
+                    display="flex"
+                    flexDir="column"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                  >
+                    <Text
+                      overflow="hidden"
+                      textOverflow="ellipsis"
+                      whiteSpace="nowrap"
+                      maxW={{ base: "100px", md: "150px", lg: "200px", xl: "250px" }}
+                    >
+                      {!chat.isGroupChat
+                        ? getSender(loggedUser, chat.users)
+                        : chat.chatName}
+                    </Text>
+                    {chat.latestMessage && (
+                      <Text fontSize="xs">
+                        {chat.latestMessage.content.length > 50
+                          ? chat.latestMessage.content.substring(0, 51) + "..."
+                          : chat.latestMessage.content}
+                      </Text>
+                    )}
+                  </Box>
+
+                </Box>
+
+                <hr
+                  style={{
+                    color: "#E0E0E0",
+                    backgroundColor: "#E0E0E0",
+                    height: 1,
+                    width: "100%",
+                    margin: '0 auto',
+                    border: "none",
+                  }}
                 />
-								<Box
-									ml={3}
-									display="flex"
-									flexDir="column"
-									justifyContent="center"
-									alignItems="flex-start"
-								>
-									<Text
-										overflow="hidden"
-										textOverflow="ellipsis"
-										whiteSpace="nowrap"
-										maxW={{ base: "100px", md: "150px", lg: "200px", xl: "250px" }}
-									>
-										{!chat.isGroupChat
-											? getSender(loggedUser, chat.users)
-											: chat.chatName}
-									</Text>
-									{chat.latestMessage && (
-										<Text fontSize="xs">
-											{chat.latestMessage.content.length > 50
-												? chat.latestMessage.content.substring(0, 51) + "..."
-												: chat.latestMessage.content}
-										</Text>
-									)}
-								</Box>
 
               </Box>
             ))}
