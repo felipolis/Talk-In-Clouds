@@ -128,17 +128,31 @@ const MyChats = ({ fetchAgain }) => {
                     flexDir="column"
                     justifyContent="center"
                     alignItems="flex-start"
+                    w="100%"
                   >
-                    <Text
-                      overflow="hidden"
-                      textOverflow="ellipsis"
-                      whiteSpace="nowrap"
-                      maxW={{ base: "100px", md: "150px", lg: "200px", xl: "250px" }}
+                    <Box
+                      display="flex"
+                      flexDir="row"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      w="100%"
                     >
-                      {!chat.isGroupChat
-                        ? getSender(loggedUser, chat.users)
-                        : chat.chatName}
-                    </Text>
+                      <Text>
+                        {!chat.isGroupChat
+                          ? getSender(loggedUser, chat.users)
+                          : chat.chatName}
+                      </Text>
+                      <Text fontSize="xs">
+                        {chat.latestMessage &&
+                          new Date(chat.latestMessage.createdAt).toLocaleTimeString(
+                            "en-US",
+                            {
+                              hour: "numeric",
+                              minute: "numeric",
+                            }
+                          )}
+                      </Text>
+                    </Box>
                     {chat.latestMessage && (
                       <Text fontSize="xs">
                         {chat.latestMessage.content.length > 50
