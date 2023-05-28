@@ -12,7 +12,6 @@ const router = express.Router();
 router.post(
     '/signup',
     body('email')
-        .isEmail().withMessage('Email inválido')
         .exists().withMessage('Email é obrigatório')
         .custom(async (value) => {
             const email = await userModel.findOne({ email: value });
@@ -46,7 +45,6 @@ router.post(
 router.post(
     '/signin',
     body('email')
-        .isEmail().withMessage('Email inválido')
         .exists().withMessage('Email é obrigatório'),
 
     body('password')

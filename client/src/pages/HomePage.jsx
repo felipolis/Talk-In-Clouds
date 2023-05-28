@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Login from '../components/Login'
 import Register from '../components/Register'
-import { useDispatch } from "react-redux";
 import {
   Box,
   Container,
@@ -13,17 +12,16 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import { useSelector } from 'react-redux';
 
 const HomePage = () => {
   const navigate = useNavigate()
-  const { user } = useSelector((state) => state.user)
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("actkn"));
     if (user) {
       navigate('/chats')
     }
-  }, [navigate, user])
+  }, [navigate])
 
   return (
     <Container maxW='xl' centerContent>
