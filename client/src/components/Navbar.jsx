@@ -182,7 +182,7 @@ const Navbar = () => {
                 >
                   {notif.chat.isGroupChat
                     ? `New Message in ${notif.chat.chatName}`
-                    : `New Message from ${notif.sender.name}`}
+                    : `New Message from ${notif.sender.name !== undefined ? notif.sender.name : getSender(user, notif.chat.users)}`}
                 </MenuItem>
               ))}
             </MenuList>
