@@ -470,15 +470,24 @@ Em resumo, o arquivo implementa um provedor de contexto para gerenciar o estado 
 ##### Server
 
 1. instalação das dependencias:
+
    ```bash
    $ cd server
    $ yarn
    ```
 2. Configuração das variaveis de ambiente:
+
    ```bash
    $ cp .env.example .env
    ```
+
+   ```
+   MONGODB_URL="<MONGODB_URL>"
+   PORT=<PORT>
+   TOKEN_SECRET_KEY='<SECRET>'
+   ```
 3. Iniciar o servidor:
+
    ```bash
    $ yarn start
    ```
@@ -486,18 +495,26 @@ Em resumo, o arquivo implementa um provedor de contexto para gerenciar o estado 
 ##### Client
 
 1. Instalação das dependencias:
+
    ```bash
    $ cd client
    $ yarn
    ```
 2. Configuração das variaveis de ambiente:
+
    ```bash
    $ cp .env.example .env
    ```
+
+   ```
+   REACT_APP_API_URL="<API_URL>"
+   REACT_APP_SOCKET_URL="<SOCKET_URL>"
+   REACT_APP_CLOUDINARY_URL="<CLOUDINARY_URL>"
+   ```
 3. Inicia o cliente:
+
    ```
    $ yarn start
    ```
-
 
 ***Made by Felipe Archanjo.***
