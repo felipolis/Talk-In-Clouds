@@ -41,7 +41,6 @@ export const getSender = (loggedUser, users) => {
 };
 
 export const getSenderPic = (loggedUser, users) => {
-    console.log(users[0]._id === loggedUser._id ? users[1].pic : users[0].pic)
     return users[0]._id === loggedUser._id ? users[1].pic : users[0].pic;
 };
 
