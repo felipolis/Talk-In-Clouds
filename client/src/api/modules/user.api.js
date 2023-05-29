@@ -9,7 +9,7 @@ const userEndpoints = {
 
 const userApi = {
     signup: async ({name, email, password, confirmPassword, pic}) => {
-        console.log(name, email, password, confirmPassword, pic)
+        //console.log(name, email, password, confirmPassword, pic)
         try {
             const response = await publicClient.post(
                 userEndpoints.signup, {

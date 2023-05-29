@@ -46,7 +46,7 @@ const GroupChatModal = ({children}) => {
     const { response, error } = await userApi.getUsers({ search });
 
     if (response) {
-      console.log(response);
+      //console.log(response);
       setLoading(false);
       setSearchResult(response);
     }

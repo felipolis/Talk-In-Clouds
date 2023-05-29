@@ -50,6 +50,8 @@ const io = new Server(server, {
 });
 
 // Eventos de conexão e desconexão
+global.onlineUsers = [];
+
 io.on('connection', (socket) => {
     console.log('a user connected');
 
@@ -57,6 +59,10 @@ io.on('connection', (socket) => {
         socket.join(userData._id);
         socket.emit('connected');
         console.log(`User ${userData._id} connected`);
+
+        // Adiciona [userData._id, socket.id] ao array global.onlineUsers
+        global.onlineUsers.push([userData._id, socket.id]);
+        io.emit('onlineUsers', global.onlineUsers);
     });
 
     socket.on("join chat", (room) => {
@@ -86,8 +92,12 @@ io.on('connection', (socket) => {
         socket.in(room).emit("stop typing");
     });
 
-    socket.off("disconnect", () => {
+    socket.on("disconnect", () => {
         console.log("user disconnected");
-        socket.leave(userData._id);
+        const index = global.onlineUsers.findIndex((user) => user[1] === socket.id);
+        if (index > -1) {
+            global.onlineUsers.splice(index, 1);
+            io.emit('onlineUsers', global.onlineUsers);
+        }
     });
 });

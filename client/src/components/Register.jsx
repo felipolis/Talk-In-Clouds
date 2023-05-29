@@ -36,7 +36,7 @@ const Register = () => {
       });
       return;
     }
-    console.log(pics);
+    //console.log(pics);
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
@@ -49,11 +49,11 @@ const Register = () => {
         .then((res) => res.json())
         .then((data) => {
           setPic(data.url.toString());
-          console.log(data.url.toString());
+          //console.log(data.url.toString());
           setPicLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
           setPicLoading(false);
         });
     } else {
@@ -92,13 +92,13 @@ const Register = () => {
       });
       return;
     }
-    console.log(name, email, password, pic);
+    //console.log(name, email, password, pic);
 
     // Requisição
     const { response, error } = await userApi.signup({name, email, password, confirmPassword: confirmpassword, pic})
 
     if (response) {
-      console.log(response);
+      //console.log(response);
       toast({
         title: "Registration Successful",
         status: "success",

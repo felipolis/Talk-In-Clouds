@@ -2,7 +2,7 @@ import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
-import { getSender, getSenderFull } from "../config/ChatLogics";
+import { getSender, getSenderFull, getSenderId } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -34,6 +34,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
+  const [onlineUsers , setOnlineUsers] = useState([]); // [(user._id, socket.id()), ...]
   const toast = useToast();
 
   const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
@@ -53,8 +54,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
+    socket.on("onlineUsers", (users) => setOnlineUsers(users));
+
+    return () => {
+      socket.disconnect();
+    };
 
   }, []);
+
+  useEffect(() => {
+    console.log("onlineUsers: ", onlineUsers);
+
+  }, [onlineUsers]);
   
   useEffect(() => {
     fetchMessages();
@@ -186,7 +197,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                                 <Text>
                                   {getSender(user, selectedChat.users)}
                                 </Text>
-                                  {isOnline ? (
+                                  {onlineUsers.find((u) => u[0] === getSenderId(user, selectedChat.users)) ? (
                                     <Box
                                       display="flex"
                                       alignItems="center"
@@ -197,7 +208,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                                         className="fas fa-circle" 
                                         style={{ 
                                           color: "green", 
-                                          width: "10px" 
+                                          fontSize: "10px" 
                                         }}></i>
                                       <Text fontSize="sm" color="gray.500">
                                         Online
