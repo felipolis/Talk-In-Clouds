@@ -252,6 +252,157 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
      ```
    - Explicação: Essa solicitação é usada para remover um usuário de um grupo de chat existente. O cliente faz uma solicitação PUT com o ID do chat (chatId) e o ID do usuário a ser removido (userId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes do grupo de chat atualizado, incluindo o ID único, nome do chat (chatName), indicador de chat em grupo (isGroupChat), lista de usuários participantes (users), data de criação (createdAt) e data de atualização (updatedAt).
 
+## Estrutura do Projeto
+
+##### Client:
+
+> /client
+>
+>> /src
+>>
+>>> /animations
+>>>
+>>>> typing.json
+>>>>
+>>>
+>>> /api
+>>>
+>>>> /client
+>>>>
+>>>>> private.client.js
+>>>>>
+>>>>> public.client.js
+>>>>>
+>>>>
+>>>> /modules
+>>>>
+>>>>> chat.api.js
+>>>>>
+>>>>> message.api.js
+>>>>>
+>>>>> user.api.js
+>>>>>
+>>>>
+>>>
+>>> /components
+>>>
+>>>> Register.jsx
+>>>>
+>>>> Login.jsx
+>>>>
+>>>> Navbar.jsx
+>>>>
+>>>> ChatLoading.jsx
+>>>>
+>>>> ProfileModal.jsx
+>>>>
+>>>> UserListItem.jsx
+>>>>
+>>>> MyChats.jsx
+>>>>
+>>>> GroupChatModal.jsx
+>>>>
+>>>> UserBadgeItem.jsx
+>>>>
+>>>> ChatBox.jsx
+>>>>
+>>>> SingleChat.jsx
+>>>>
+>>>> ScrollableChat.jsx
+>>>>
+>>>> UpdateGroupChatModal.jsx
+>>>>
+>>>> styles.css
+>>>>
+>>>
+>>> /config
+>>>
+>>>> ChatLogics.js
+>>>>
+>>>
+>>> /context
+>>>
+>>>> ChatProvider.jsx
+>>>>
+>>>
+>>> /pages
+>>>
+>>>> HomePage.jsx
+>>>>
+>>>> ChatPage.jsx
+>>>>
+>>>
+>>> App.jsx
+>>>
+>>> App.css
+>>>
+>>> index.jsx
+>>>
+>>> index.css
+>>>
+>>
+>> .env
+>>
+>> package.json
+>>
+
+##### Server:
+
+> /server
+>
+>> /src
+>>
+>>> /middlewares
+>>>
+>>>> token.middleware.js
+>>>>
+>>>
+>>> /handlers
+>>>
+>>>> request.handler.js
+>>>>
+>>>> response.handler.js
+>>>>
+>>>
+>>> /models
+>>>
+>>>> model.options.js
+>>>>
+>>>> user.model.js
+>>>>
+>>>> chat.model.js
+>>>>
+>>>> message.model.js
+>>>>
+>>>
+>>> /routes
+>>>
+>>>> index.js
+>>>>
+>>>> user.route.js
+>>>>
+>>>> chat.route.js
+>>>>
+>>>> message.route.js
+>>>>
+>>>
+>>> /controllers
+>>>
+>>>> user.controller.js
+>>>>
+>>>> chat.controller.js
+>>>>
+>>>> message.controller.js
+>>>>
+>>>
+>>
+>> index.js
+>>
+>> .env
+>>
+>> package.json
+>>
+
 ## Explicação detalhada
 
 ## Como executar
