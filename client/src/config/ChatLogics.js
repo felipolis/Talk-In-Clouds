@@ -48,6 +48,17 @@ export const getSenderId = (loggedUser, users) => {
     return users[0]._id === loggedUser._id ? users[1]._id : users[0]._id;
 }
 
+export const getSendersId = (loggedUser, users) => {
+    let sendersId = [];
+    users.forEach(user => {
+        if (user._id !== loggedUser._id) {
+            sendersId.push(user._id);
+        }
+    });
+
+    return sendersId;
+}
+
 export const getSenderFull = (loggedUser, users) => {
     return users[0]._id === loggedUser._id ? users[1] : users[0];
 };

@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on("new message", (newMessageRecieved) => {
-        console.log(newMessageRecieved);
+        //console.log(newMessageRecieved);
 
         var chat = newMessageRecieved.chat;
 

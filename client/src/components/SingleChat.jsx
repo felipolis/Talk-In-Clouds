@@ -2,7 +2,7 @@ import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Box, Text } from "@chakra-ui/layout";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
-import { getSender, getSenderFull, getSenderId } from "../config/ChatLogics";
+import { getSender, getSenderFull, getSenderId, getSendersId } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -20,6 +20,7 @@ import { ChatState } from "../context/ChatProvider";
 import userApi from "../api/modules/user.api";
 import chatApi from "../api/modules/chat.api";
 import messageApi from "../api/modules/message.api";
+import notificationApi from "../api/modules/notification.api";
 
 const ENDPOINT = `${process.env.REACT_APP_SOCKET_URL}` || "http://127.0.0.1:5000";
 
@@ -62,13 +63,30 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   }, []);
 
-  useEffect(() => {
-    console.log("onlineUsers: ", onlineUsers);
+  const deleteNotifications = async (chatId) => {
+    const { response, error } = await notificationApi.deleteNotifications({
+      chatId,
+      receiverId: user._id,
+    });
 
-  }, [onlineUsers]);
+    if (response) {
+      setNotification(
+        notification.filter((n) => n.chat._id !== selectedChat._id)
+      );
+      console.log("Notifications Deleted");
+    }
+
+    if (error) {
+      console.log(error);
+    }
+  };
   
   useEffect(() => {
     fetchMessages();
+
+    if (selectedChat) {
+      deleteNotifications(selectedChat._id);
+    }
 
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
@@ -76,7 +94,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket.on("message received", (newMessageRecieved) => {
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
         if (!notification.includes(newMessageRecieved)) {
@@ -134,6 +152,26 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         socket.emit("new message", response);
         setMessages([...messages, response]);
         setFetchAgain(!fetchAgain);
+
+        // Enviar notificações
+        const receivers = getSendersId(user, selectedChat.users);
+        receivers.forEach(async (receiverId) => {
+          const data = await notificationApi.sendNotification({
+            receiverId,
+            chatId: selectedChat._id,
+            content: newMessage,
+          });
+
+          if (data.response) {
+            console.log("Notification Sent");
+          }
+
+          if (data.error) {
+            console.log(error);
+          }
+        });
+        
+
       }
 
       if (error) {

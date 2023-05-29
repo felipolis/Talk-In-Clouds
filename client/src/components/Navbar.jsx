@@ -20,7 +20,7 @@ import { Tooltip } from "@chakra-ui/tooltip";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/toast";
 import ChatLoading from "./ChatLoading";
@@ -34,6 +34,7 @@ import { ChatState } from "../context/ChatProvider";
 
 import userApi from "../api/modules/user.api"
 import chatApi from "../api/modules/chat.api"
+import notificationApi from "../api/modules/notification.api";
 
 const Navbar = () => {
 
@@ -54,6 +55,22 @@ const Navbar = () => {
     chats,
     setChats,
   } = ChatState();
+
+  useEffect(() => {
+    const getAllNotifications = async () => {
+      const { response, error } = await notificationApi.fetchNotifications();
+
+      if (response) {
+        setNotification(response);
+      }
+
+      if (error) {
+        console.log(error);
+      }
+    }
+
+    getAllNotifications();
+  }, []);
 
 	const logoutHandler = () => {
 		localStorage.removeItem("userInfo");
