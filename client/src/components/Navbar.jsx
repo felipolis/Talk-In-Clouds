@@ -128,6 +128,7 @@ const Navbar = () => {
         bg="#181F2E"
         w="100%"
         p="10px 10px 10px 10px"
+        h="8vh"
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>

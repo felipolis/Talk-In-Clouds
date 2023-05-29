@@ -63,8 +63,13 @@ const MyChats = ({ fetchAgain }) => {
         alignItems="center"
         pt={3}
 				bg="#E2EEF7"
+        gap={5}
       >
-        My Chats
+        <Text
+          fontSize={{ base: "30px", md: "20px" }}
+        >
+          My Chats
+        </Text>
         <GroupChatModal>
           <Button
             display="flex"
