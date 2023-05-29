@@ -14,6 +14,8 @@ Para manter a consistência dos dados, utilizamos o LocalStorage, que é uma for
 
 No geral, essa aplicação de sistema distribuído foi projetada para fornecer uma plataforma de chat em tempo real, com recursos de cadastro, autenticação, grupos de conversa e armazenamento seguro de dados. Essa combinação de tecnologias e abordagens permite uma comunicação eficiente e confiável entre os usuários, independentemente de sua localização geográfica.
 
+## Layout
+
 ## Sistema Distribuido
 
 A aplicação se encaixa na definição de sistemas distribuídos de várias maneiras. Um sistema distribuído é composto por um conjunto de componentes interconectados que trabalham juntos para realizar uma função específica. Nesse caso, a aplicação web de chat em tempo real utiliza diferentes tecnologias e serviços distribuídos para criar uma experiência colaborativa entre os usuários. Abaixo, detalharei como a aplicação se encaixa nessa definição:
