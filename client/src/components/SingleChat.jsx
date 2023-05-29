@@ -104,9 +104,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       } else {
         setFetchAgain(!fetchAgain);
         setMessages([...messages, newMessageRecieved]);
+        if (selectedChat) {
+          deleteNotifications(selectedChat._id);
+        }
       }
     });
   });
+
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
