@@ -61,6 +61,7 @@ const Navbar = () => {
       const { response, error } = await notificationApi.fetchNotifications();
 
       if (response) {
+        console.log(response);
         setNotification(response);
       }
 
@@ -181,7 +182,7 @@ const Navbar = () => {
                 >
                   {notif.chat.isGroupChat
                     ? `New Message in ${notif.chat.chatName}`
-                    : `New Message from ${getSender(user, notif.chat.users)}`}
+                    : `New Message from ${notif.sender.name}`}
                 </MenuItem>
               ))}
             </MenuList>
