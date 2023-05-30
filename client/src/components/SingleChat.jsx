@@ -357,7 +357,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                           <></>
                         )}
                         <i
-                          className="fas fa-smile"
+                          className="far fa-smile"
                           onClick={() => setShowEmojiPicker(!showEmojiPicker)}
                           style={{
                             color: "black",
