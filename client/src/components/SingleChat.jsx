@@ -16,6 +16,7 @@ import ScrollableChat from "./ScrollableChat";
 import animationData from "../animations/typing.json";
 import UpdateGroupChatModal from "./UpdateGroupChatModal";
 import { ChatState } from "../context/ChatProvider";
+import EmojiPicker from 'emoji-picker-react';
 
 import userApi from "../api/modules/user.api";
 import chatApi from "../api/modules/chat.api";
@@ -36,6 +37,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [istyping, setIsTyping] = useState(false);
   const [isOnline, setIsOnline] = useState(false);
   const [onlineUsers , setOnlineUsers] = useState([]); // [(user._id, socket.id()), ...]
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const toast = useToast();
 
   const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
@@ -309,46 +311,63 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     h="100%"
                     overflowY="hidden"
                 >
-                    {loading ? (
-                        <Spinner
-                            size="xl"
-                            w={20}
-                            h={20}
-                            alignSelf="center"
-                            margin="auto"
-                        />
-                        ) : (
-                        <div className="messages">
-                            <ScrollableChat messages={messages} />
-                        </div>
-                        )}
+                  {loading ? (
+                    <Spinner
+                      size="xl"
+                      w={20}
+                      h={20}
+                      alignSelf="center"
+                      margin="auto"
+                    />
+                  ) : (
+                    <div 
+                      className="messages"
+                      onClick={() => setShowEmojiPicker(false)}
+                    >
+                        <ScrollableChat messages={messages} />
+                    </div>
+                  )}
                     
-                    <FormControl
-                        onKeyDown={sendMessage}
-                        id="first-name"
-                        isRequired
-                        mt={3}
-                        >
-                        {istyping ? (
-                            <div>
-                              <Lottie
-                                options={defaultOptions}
-                                // height={50}
-                                width={70}
-                                style={{ marginBottom: 15, marginLeft: 0 }}
-                              />
-                            </div>
+                  <FormControl
+                    onKeyDown={sendMessage}
+                    id="first-name"
+                    isRequired
+                    mt={3}
+                  >
+                      {istyping ? (
+                        <div style={{ position: "absolute", bottom: "2rem", zIndex: "999", left: "2rem" }}>
+                          <Lottie
+                            options={defaultOptions}
+                            // height={50}
+                            width={70}
+                            style={{ marginBottom: 15, marginLeft: 0 }}
+                          />
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                      <Box display="flex" alignItems="center" justifyContent="space-between" w="100%" h="100%" position="relative" gap={2}>
+                        {showEmojiPicker ? (
+                          <Box position="absolute" bottom="60px" roundedLeft="0px" zIndex="999">
+                            <EmojiPicker onEmojiClick={(emojiObject) => {
+                              setNewMessage(newMessage + emojiObject.emoji);
+                            }} />
+                          </Box>
                         ) : (
-                            <></>
+                          <></>
                         )}
-                        <Input
-                            variant="filled"
-                            bg="#E0E0E0"
-                            placeholder="Enter a message.."
-                            value={newMessage}
-                            onChange={typingHandler}
-                        />
-                    </FormControl>
+                        <i
+                          className="fas fa-smile"
+                          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                          style={{
+                            color: "black",
+                            fontSize: "1.5rem",
+                            cursor: "pointer",
+                          }}
+                        ></i>
+                        <Input variant="filled" bg="#E0E0E0" placeholder="Enter a message.." value={newMessage} onChange={typingHandler} />
+                    </Box>
+                  </FormControl>
                 </Box>
             </>
         ) : (
