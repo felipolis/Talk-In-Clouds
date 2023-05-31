@@ -15,6 +15,25 @@ Para manter a consistência dos dados, utilizamos o LocalStorage, que é uma for
 No geral, essa aplicação de sistema distribuído foi projetada para fornecer uma plataforma de chat em tempo real, com recursos de cadastro, autenticação, grupos de conversa e armazenamento seguro de dados. Essa combinação de tecnologias e abordagens permite uma comunicação eficiente e confiável entre os usuários, independentemente de sua localização geográfica.
 
 ## Layout
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/login.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/register.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/search.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/typing.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/messages1.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/new-group.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/edit-group.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/notifications.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/grupo.png?raw=true)
+
+![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/messages2.png?raw=true)
 
 ## Sistema Distribuido
 
