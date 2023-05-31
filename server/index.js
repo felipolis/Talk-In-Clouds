@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on("typing", (room) => {
-        socket.in(room).emit("typing");
+        socket.in(room).emit("typing", room);
     });
 
     socket.on("stop typing", (room) => {

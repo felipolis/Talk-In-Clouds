@@ -39,6 +39,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [onlineUsers , setOnlineUsers] = useState([]); // [(user._id, socket.id()), ...]
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const toast = useToast();
+  const [room, setRoom] = useState("");
 
   const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
 
@@ -55,7 +56,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
     socket.on("connected", () => setSocketConnected(true));
-    socket.on("typing", () => setIsTyping(true));
+    socket.on("typing", (room) => {
+      setIsTyping(true)
+      setRoom(room)
+    });
     socket.on("stop typing", () => setIsTyping(false));
     socket.on("onlineUsers", (users) => setOnlineUsers(users));
 
@@ -334,7 +338,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     isRequired
                     mt={3}
                   >
-                      {istyping ? (
+                      {istyping && room === selectedChat._id ? (
                         <div style={{ position: "absolute", bottom: "2rem", zIndex: "998", left: "2rem" }}>
                           <Lottie
                             options={defaultOptions}
