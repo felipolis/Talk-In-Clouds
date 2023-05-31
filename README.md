@@ -345,6 +345,8 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
 >>>>>
 >>>>> message.api.js
 >>>>>
+>>>>> notification.api.js
+>>>>>
 >>>>> user.api.js
 >>>>>
 >>>>
@@ -439,6 +441,8 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
 >>>>
 >>>> message.model.js
 >>>>
+>>>> notification.model.js
+>>>>
 >>>
 >>> /routes
 >>>
@@ -450,6 +454,8 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
 >>>>
 >>>> message.route.js
 >>>>
+>>>> notification.route.js
+>>>>
 >>>
 >>> /controllers
 >>>
@@ -458,6 +464,8 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
 >>>> chat.controller.js
 >>>>
 >>>> message.controller.js
+>>>>
+>>>> notification.controller.js
 >>>>
 >>>
 >>
