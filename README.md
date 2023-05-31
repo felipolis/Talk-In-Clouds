@@ -251,8 +251,73 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
      }
      ```
    - Explicação: Essa solicitação é usada para remover um usuário de um grupo de chat existente. O cliente faz uma solicitação PUT com o ID do chat (chatId) e o ID do usuário a ser removido (userId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes do grupo de chat atualizado, incluindo o ID único, nome do chat (chatName), indicador de chat em grupo (isGroupChat), lista de usuários participantes (users), data de criação (createdAt) e data de atualização (updatedAt).
+10. BUSCAR TODAS AS NOTIFICAÇÕES:
 
-## Estrutura do Projeto
+    - Requisição:
+      - Método: GET
+      - URL: http://localhost:5000/api/v1/notification
+      - Cabeçalhos:
+        - "Content-Type": "application/json"
+        - "Authorization": `Bearer <TOKEN>`
+      - Corpo: vazio
+    - Resposta:
+      ```
+      {
+        "_id": "<ID>",
+        "sender": "<USER>",
+        "receiver": "<USER>",
+        "content": "<CONTENT>",
+        "chat": "<CHAT>",
+        "createdAt": "<DATE>",
+        "updatedAt": "<DATE>"
+      }
+      ```
+    - Explicação: Essa solicitação é usada para buscar todas as notificações do usuário. O cliente faz uma solicitação GET para a URL especificada. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes da notificação, incluindo o ID único, remetente (sender), destinatário (receiver), conteúdo (content), chat associado (chat), data de criação (createdAt) e data de atualização (updatedAt).
+11. ENVIAR NOTIFICAÇÃO:
+
+    - Requisição:
+      - Método: POST
+      - URL: http://localhost:5000/api/v1/notification
+      - Cabeçalhos:
+        - "Content-Type": "application/json"
+        - "Authorization": `Bearer <TOKEN>`
+      - Corpo:
+        ```
+        {
+          "content": "<CONTENT>",
+          "receiverId": "<RECEIVER_ID>",
+          "chatId": "<CHAT_ID>"
+        }
+        ```
+    - Resposta:
+      ```
+      {
+        "message": "<MESSAGE>"
+      }
+      ```
+    - Explicação: Essa solicitação é usada para enviar uma nova notificação para um usuário específico. O cliente faz uma solicitação POST com o conteúdo da notificação (content), o ID do destinatário (receiverId) e o ID do chat associado (chatId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna uma mensagem indicando o sucesso do envio da notificação.
+12. DELETAR NOTIFICAÇÕES:
+
+    - Requisição:
+      - Método: DELETE
+      - URL: http://localhost:5000/api/v1/notification
+      - Cabeçalhos:
+        - "Content-Type": "application/json"
+        - "Authorization": `Bearer <TOKEN>`
+      - Corpo:
+        ```
+        {
+          "receiverId": "<RECEIVER_ID>",
+          "chatId": "<CHAT_ID>"
+        }
+        ```
+    - Resposta:
+      ```
+      {
+        "message": "<MESSAGE>"
+      }
+      ```
+    - Explicação: Essa solicitação é usada para deletar as notificações de um usuário em um chat específico. O cliente faz uma solicitação DELETE com o ID do chat (chatId) e o ID do destinatário (receiverId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna uma mensagem indicando o sucesso da exclusão das notificações.
 
 ##### Client:
 
@@ -494,8 +559,6 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
 **/server/src/controllers/message.controller.js:** O arquivo message.controller.js contém os controladores responsáveis pelas operações relacionadas às mensagens em um aplicativo de chat. O controlador allMessages recupera todas as mensagens de um chat específico, com base no parâmetro chatId fornecido. Ele busca as mensagens no banco de dados, popula os campos necessários (como o remetente da mensagem e o chat associado) e retorna as mensagens. O controlador sendMessage lida com o envio de uma nova mensagem. Ele recebe o conteúdo da mensagem e o ID do chat, cria uma nova mensagem com base nesses dados e no usuário atualmente autenticado, salva a mensagem no banco de dados e retorna a mensagem enviada. Além disso, ele também atualiza a última mensagem do chat associado. Esses controladores implementam a lógica para manipular mensagens, realizar operações de busca e envio de mensagens e fornecer respostas adequadas aos usuários.
 
 **/server/src/controllers/notification.controller.js:** O arquivo notification.controller.js contém os controladores responsáveis por lidar com as notificações em um aplicativo. O controlador allNotifications recupera todas as notificações destinadas ao usuário atualmente autenticado. Ele busca as notificações no banco de dados com base no ID do receptor, popula os campos necessários (como remetente, receptor e chat associado) e retorna as notificações. O controlador sendNotification lida com o envio de uma nova notificação. Ele recebe o conteúdo da notificação, o ID do receptor e o ID do chat associado. Em seguida, cria uma nova notificação com base nesses dados, salva-a no banco de dados e retorna uma resposta indicando o sucesso do envio. O controlador deleteNotifications lida com a exclusão de notificações de um determinado chat e receptor. Ele recebe o ID do chat e o ID do receptor, busca as notificações correspondentes no banco de dados e as exclui. Em seguida, retorna uma resposta indicando o sucesso da exclusão. Esses controladores implementam a lógica para recuperar, enviar e excluir notificações, além de fornecer respostas adequadas aos usuários.
-
-
 
 ## Como executar
 
