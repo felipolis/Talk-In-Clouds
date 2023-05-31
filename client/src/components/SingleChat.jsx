@@ -335,7 +335,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     mt={3}
                   >
                       {istyping ? (
-                        <div style={{ position: "absolute", bottom: "2rem", zIndex: "999", left: "2rem" }}>
+                        <div style={{ position: "absolute", bottom: "2rem", zIndex: "998", left: "2rem" }}>
                           <Lottie
                             options={defaultOptions}
                             // height={50}
