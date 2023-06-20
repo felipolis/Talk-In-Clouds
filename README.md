@@ -15,6 +15,7 @@ Para manter a consistência dos dados, utilizamos o LocalStorage, que é uma for
 No geral, essa aplicação de sistema distribuído foi projetada para fornecer uma plataforma de chat em tempo real, com recursos de cadastro, autenticação, grupos de conversa e armazenamento seguro de dados. Essa combinação de tecnologias e abordagens permite uma comunicação eficiente e confiável entre os usuários, independentemente de sua localização geográfica.
 
 ## Layout
+
 ![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/login.png?raw=true)
 
 ![image](https://github.com/felipolis/Talk-In-Clouds/blob/main/client/src/layouts/register.png?raw=true)
@@ -270,7 +271,48 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
      }
      ```
    - Explicação: Essa solicitação é usada para remover um usuário de um grupo de chat existente. O cliente faz uma solicitação PUT com o ID do chat (chatId) e o ID do usuário a ser removido (userId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes do grupo de chat atualizado, incluindo o ID único, nome do chat (chatName), indicador de chat em grupo (isGroupChat), lista de usuários participantes (users), data de criação (createdAt) e data de atualização (updatedAt).
-10. BUSCAR TODAS AS NOTIFICAÇÕES:
+10. BUSCAR TODAS AS MENSAGENS DE UM DETERMINADO CHAT:
+
+    - Requisição:
+      - Método: GET
+      - URL: http://localhost:5000/api/v1/message/:<CHAT_ID>
+      - Cabeçalhos:
+        - "Content-Type": "application/json"
+        - "Authorization": `Bearer <TOKEN>`
+      - Corpo: vazio
+    - Resposta:
+      ```
+      [<MESSAGES>]
+      ```
+    - Essa solicitação é usada para buscar todas as mensagens de um chat específico. O cliente faz uma solicitação GET para a URL especificada, onde <CHAT_ID> é substituído pelo ID único do chat desejado. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna uma lista de todas as mensagens (`<MESSAGES>`) associadas ao chat.
+11. ENVIAR UMA NOVA MENSAGEM:
+
+    - Requisição:
+      - Método: POST
+      - URL: http://localhost:5000/api/v1/message
+      - Cabeçalhos:
+        - "Content-Type": "application/json"
+        - "Authorization": `Bearer <TOKEN>`
+      - Corpo:
+        ```
+        {
+          "content": "<CONTENT>",
+          "chatId": "<CHAT_ID>"
+        }
+        ```
+    - Resposta:
+      ```
+      {
+        "_id": "<ID>",
+        "sender": "<USER>",
+        "content": "<CONTENT>",
+        "chat": "<CHAT>",
+        "createdAt": "<DATE>",
+        "updatedAt": "<DATE>"
+      }
+      ```
+    - Explicação: Essa solicitação é usada para enviar uma nova mensagem para um chat específico. O cliente faz uma solicitação POST com o conteúdo da mensagem (content) e o ID do chat (chatId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes da mensagem enviada, incluindo o ID único, remetente (sender), conteúdo (content), chat associado (chat), data de criação (createdAt) e data de atualização (updatedAt).
+12. BUSCAR TODAS AS NOTIFICAÇÕES:
 
     - Requisição:
       - Método: GET
@@ -281,7 +323,7 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
       - Corpo: vazio
     - Resposta:
       ```
-      {
+      [{
         "_id": "<ID>",
         "sender": "<USER>",
         "receiver": "<USER>",
@@ -289,10 +331,10 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
         "chat": "<CHAT>",
         "createdAt": "<DATE>",
         "updatedAt": "<DATE>"
-      }
+      }]
       ```
     - Explicação: Essa solicitação é usada para buscar todas as notificações do usuário. O cliente faz uma solicitação GET para a URL especificada. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes da notificação, incluindo o ID único, remetente (sender), destinatário (receiver), conteúdo (content), chat associado (chat), data de criação (createdAt) e data de atualização (updatedAt).
-11. ENVIAR NOTIFICAÇÃO:
+13. ENVIAR NOTIFICAÇÃO:
 
     - Requisição:
       - Método: POST
@@ -315,7 +357,7 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
       }
       ```
     - Explicação: Essa solicitação é usada para enviar uma nova notificação para um usuário específico. O cliente faz uma solicitação POST com o conteúdo da notificação (content), o ID do destinatário (receiverId) e o ID do chat associado (chatId) no corpo da requisição. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna uma mensagem indicando o sucesso do envio da notificação.
-12. DELETAR NOTIFICAÇÕES:
+14. DELETAR NOTIFICAÇÕES:
 
     - Requisição:
       - Método: DELETE
