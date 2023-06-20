@@ -282,7 +282,7 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
       - Corpo: vazio
     - Resposta:
       ```
-      [<MESSAGES>]
+      [<MESSAGE>]
       ```
     - Essa solicitação é usada para buscar todas as mensagens de um chat específico. O cliente faz uma solicitação GET para a URL especificada, onde <CHAT_ID> é substituído pelo ID único do chat desejado. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna uma lista de todas as mensagens (`<MESSAGES>`) associadas ao chat.
 11. ENVIAR UMA NOVA MENSAGEM:
@@ -323,15 +323,7 @@ As solicitações e respostas descritas são exemplos de requisições HTTP em u
       - Corpo: vazio
     - Resposta:
       ```
-      [{
-        "_id": "<ID>",
-        "sender": "<USER>",
-        "receiver": "<USER>",
-        "content": "<CONTENT>",
-        "chat": "<CHAT>",
-        "createdAt": "<DATE>",
-        "updatedAt": "<DATE>"
-      }]
+      [<NOTIFICATION>]
       ```
     - Explicação: Essa solicitação é usada para buscar todas as notificações do usuário. O cliente faz uma solicitação GET para a URL especificada. O cabeçalho inclui um token de autenticação para autorização. A resposta retorna os detalhes da notificação, incluindo o ID único, remetente (sender), destinatário (receiver), conteúdo (content), chat associado (chat), data de criação (createdAt) e data de atualização (updatedAt).
 13. ENVIAR NOTIFICAÇÃO:
